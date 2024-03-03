@@ -1,0 +1,27 @@
+{
+  "env": {
+    "node": true,
+    "browser": false,
+    "commonjs": true,
+    "es6": true
+  },
+  "extends": "eslint:recommended",
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly",
+    "console": "readonly",
+    "describe": "readonly",
+    "it": "readonly"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "requireConfig": false
+  },
+  "rules": {
+    "no-console": "off",
+    "no-prototype-builtins": "off",
+    "no-undef": "warn",
+    "no-unused-vars": "warn",
+    "no-useless-escape": "warn"
+  }
+}

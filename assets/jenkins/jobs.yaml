@@ -1,0 +1,64 @@
+jobs:
+  - script: >
+      organizationFolder('GitHubOrgName') {
+          description("Company Inc. GitHub Organization Folder")
+          displayName('GitHubOrgName')
+          organizations {
+              github {
+                  repoOwner('GitHubOrgName')
+                  apiUri('')
+                  credentialsId('github-app')
+                  traits {
+                      cleanBeforeCheckoutTrait {
+                          extension {
+                              deleteUntrackedNestedRepositories(false)
+                          }
+                      }
+                      pruneStaleBranchTrait()
+                  }
+              }
+          }
+          projectFactories {
+              workflowMultiBranchProjectFactory {
+                  scriptPath('Jenkinsfile')
+              }
+          }
+          orphanedItemStrategy {
+          }
+          properties {
+            jiraFolderProperty {
+                sites {
+                    jiraSite {
+                        alternativeUrl('https://jira.company.com/')
+                        appendChangeTimestamp(true)
+                        credentialsId('jira-devops-readwrite-user')
+                        readTimeout(30)
+                        supportsWikiStyleComment(true)
+                        threadExecutorNumber(10)
+                        timeout(10)
+                        updateJiraIssueForAllStatus(true)
+                        url('https://jira.company.com/')
+                    }
+                }
+            }
+            noTriggerOrganizationFolderProperty {
+                branches('^(dependabot\\/.*|develop|release|hotfix|feature\\/(?!l10_).*)$')
+            }
+          }
+          configure { node ->
+              def traits = node / navigators / 'org.jenkinsci.plugins.github__branch__source.GitHubSCMNavigator' / traits
+              traits << 'org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait' {
+                  strategyId('3')
+              }
+              traits << 'jenkins.scm.impl.trait.WildcardSCMSourceFilterTrait' {
+                  includes('*')
+              }
+              traits << 'org.jenkinsci.plugins.github__branch__source.ForkPullRequestDiscoveryTrait' {
+                  strategyId('1')
+                  trust(class: 'org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait$TrustContributors')
+              }
+              traits << 'jenkins.scm.impl.trait.RegexSCMHeadFilterTrait' {
+                  regex('^(?!(review|master|main)).*')
+              }
+          }
+      }

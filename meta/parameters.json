@@ -1,0 +1,96 @@
+{
+  "AccountId": "",
+  "VpcId": "",
+  "DeploymentType": {
+    "main": {
+      "Agents": [
+        {
+          "IP": "",
+          "Location": {
+            "City": "",
+            "State": ""
+          },
+          "Name": ""
+        }
+      ],
+      "Domain": "",
+      "ECS": {
+        "cpu": 2048,
+        "instanceType": "",
+        "memoryLimitMiB": 8192
+      },
+      "EFS": {
+        "fileSystemId": ""
+      },
+      "Hostname": "",
+      "HostedZoneId": ""
+    },
+    "feature": {
+      "ECS": {
+        "cpu": 2048,
+        "instanceType": "",
+        "memoryLimitMiB": 8192
+      },
+      "EFS": {}
+    }
+  },
+  "Regions": [],
+  "Secrets": [
+    {
+      "environment": "GITHUB_APPLICATION_IDENTIFIER",
+      "secretArn": ""
+    },
+    {
+      "environment": "GITHUB_APP_SSH_PRIVATE_KEY",
+      "secretArn": ""
+    },
+    {
+      "environment": "GITHUB_OAUTH_CLIENT_ID",
+      "secretArn": ""
+    },
+    {
+      "environment": "GITHUB_OAUTH_CLIENT_SECRET",
+      "secretArn": ""
+    },
+    {
+      "environment": "DATADOG_API_KEY",
+      "secretArn": ""
+    },
+    {
+      "environment": "EMAIL_SMTP_CLIENT_ID",
+      "secretArn": ""
+    },
+    {
+      "environment": "EMAIL_SMTP_SECRET_KEY",
+      "secretArn": ""
+    },
+    {
+      "environment": "JIRA_DEVOPS_USERNAME",
+      "secretArn": ""
+    },
+    {
+      "environment": "JIRA_DEVOPS_PASSWORD",
+      "secretArn": ""
+    },
+    {
+      "environment": "JIRA_OAUTH2_CLIENT_ID",
+      "secretArn": ""
+    },
+    {
+      "environment": "JIRA_OAUTH2_SECRET_KEY",
+      "secretArn": ""
+    },
+    {
+      "environment": "SLACK_WEBHOOK_URI",
+      "secretArn": ""
+    },
+    {
+      "environment": "SLACK_API_KEY",
+      "secretArn": ""
+    }
+  ],
+  "Security": {
+    "ProtectedIamPath": ""
+  }
+}
+

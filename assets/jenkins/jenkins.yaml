@@ -1,0 +1,348 @@
+---
+jenkins:
+  agentProtocols:
+    - "JNLP4-connect"
+    - "Ping"
+  authorizationStrategy:
+    globalMatrix:
+      # Change the GitHub OrgName & Groups here
+      permissions:
+        - "Job/Build:OrgName*developers"
+        - "Job/Cancel:OrgName*developers"
+        - "Job/Discover:OrgName*developers"
+        - "Job/Read:OrgName*developers"
+        - "Job/Workspace:OrgName*developers"
+        - "Metrics/HealthCheck:OrgName*developers"
+        - "Metrics/View:OrgName*developers"
+        - "Overall/Read:OrgName*developers"
+        - "Run/Replay:OrgName*developers"
+        - "Run/Update:OrgName*developers"
+        - "SCM/Tag:OrgName*developers"
+        - "View/Configure:OrgName*developers"
+        - "View/Create:OrgName*developers"
+        - "View/Read:OrgName*developers"
+        - "Overall/Administer:OrgName*DevOpsAdmins"
+  crumbIssuer:
+    standard:
+      excludeClientIPFromCrumb: true
+  disableRememberMe: false
+  disabledAdministrativeMonitors:
+    - "jenkins.security.QueueItemAuthenticatorMonitor"
+  # Example of an on-premise Jenkins-agent
+  labelAtoms:
+    - name: "Mac_Agent_01"
+    - name: "internalAgent"
+    - name: "docker"
+  markupFormatter:
+    rawHtml:
+      disableSyntaxHighlighting: false
+  mode: EXCLUSIVE
+  myViewsTabBar: "standard"
+  # Example of an on-premise Jenkins-agent
+  nodes:
+    - permanent:
+        labelString: "internalAgent docker"
+        launcher:
+          jnlp:
+            webSocket: true
+            workDirSettings:
+              disabled: true
+              failIfWorkDirIsMissing: false
+              internalDir: "remoting"
+        mode: EXCLUSIVE
+        name: "Mac_Agent_01"
+        nodeDescription: "On-Premise Jenkins Agent"
+        remoteFS: "/Users/user01/Jenkins"
+        retentionStrategy: "always"
+  numExecutors: 0
+  primaryView:
+    all:
+      name: "all"
+  projectNamingStrategy: "standard"
+  quietPeriod: 5
+  remotingSecurity:
+    enabled: true
+  scmCheckoutRetryCount: 0
+  securityRealm:
+    github:
+      clientID: ${GITHUB_OAUTH_CLIENT_ID}
+      clientSecret: ${GITHUB_OAUTH_CLIENT_SECRET}
+      githubApiUri: "https://api.github.com"
+      githubWebUri: "https://github.com"
+      oauthScopes: "read:org,user:email"
+  slaveAgentPort: 50000
+  systemMessage: "\r\n\r\nBuilt on: Jenkins Configuration as Code\r\n\r\n"
+  updateCenter:
+    sites:
+      - id: "default"
+        url: "https://updates.jenkins.io/update-center.json"
+      - id: "devoptics"
+        url: "https://jenkins-updates.cloudbees.com/update-center/devoptics/update-center.json"
+  # Example of a view configuration
+  views:
+    - all:
+        name: "all"
+    - list:
+        columns:
+          - "status"
+          - "weather"
+          - "jobName"
+          - "lastSuccess"
+          - "lastFailure"
+          - "lastDuration"
+          - "buildButton"
+          - "favoriteColumn"
+        includeRegex: "(.*performance-tests).*/.*"
+        name: "Example View"
+        recurse: true
+  viewsTabBar: "standard"
+
+security:
+  anonymizeSupportBundle:
+    enabled: false
+  apiToken:
+    creationOfLegacyTokenEnabled: false
+    tokenGenerationOnCreationEnabled: false
+    usageStatisticsEnabled: true
+  copyartifact:
+    mode: PRODUCTION
+  envInject:
+    enableLoadingFromMaster: false
+    enablePermissions: false
+    hideInjectedVars: true
+  globalJobDslSecurityConfiguration:
+    useScriptSecurity: true
+  sSHD:
+    port: -1
+
+credentials:
+  system:
+    # Example of various API credentials
+    domainCredentials:
+      - credentials:
+          - string:
+              description: "Datadog API Secret Key"
+              id: "datadog-api-key"
+              scope: GLOBAL
+              secret: ${DATADOG_API_KEY}
+          - string:
+              description: "Jenkins to Jira Cloud OAuth2 Secret"
+              id: "jenkins-jira-cloud-oauth2-secret"
+              scope: GLOBAL
+              secret: ${JIRA_OAUTH2_SECRET_KEY}
+          - usernamePassword:
+              description: "DevOps Jira Read/Write User"
+              id: "jira-devops-readwrite-user"
+              password: ${JIRA_DEVOPS_PASSWORD}
+              scope: GLOBAL
+              username: ${JIRA_DEVOPS_USERNAME}
+          - string:
+              description: "Slack Automation Webook URI"
+              id: "slack-automation-webhook-uri"
+              scope: GLOBAL
+              secret: ${SLACK_WEBHOOK_URI}
+          - string:
+              description: "Slack Build Status Personal Access Token"
+              id: "slack-build-status-pw"
+              scope: GLOBAL
+              secret: ${SLACK_API_KEY}
+          - gitHubApp:
+              appID: ${GITHUB_APPLICATION_IDENTIFIER}
+              description: "The GitHub Application for authenticating users and builds."
+              id: "github-app"
+              privateKey: ${GITHUB_APP_SSH_PRIVATE_KEY}
+
+unclassified:
+  ansiColorBuildWrapper:
+    colorMaps:
+      - black: "#000000"
+        blackB: "#4C4C4C"
+        blue: "#1E90FF"
+        blueB: "#4682B4"
+        cyan: "#00CDCD"
+        cyanB: "#00FFFF"
+        green: "#00CD00"
+        greenB: "#00FF00"
+        magenta: "#CD00CD"
+        magentaB: "#FF00FF"
+        name: "xterm"
+        red: "#CD0000"
+        redB: "#FF0000"
+        white: "#E5E5E5"
+        whiteB: "#FFFFFF"
+        yellow: "#CDCD00"
+        yellowB: "#FFFF00"
+      - black: "#000000"
+        blackB: "#555555"
+        blue: "#0000AA"
+        blueB: "#5555FF"
+        cyan: "#00AAAA"
+        cyanB: "#55FFFF"
+        defaultBackground: 0
+        defaultForeground: 7
+        green: "#00AA00"
+        greenB: "#55FF55"
+        magenta: "#AA00AA"
+        magentaB: "#FF55FF"
+        name: "vga"
+        red: "#AA0000"
+        redB: "#FF5555"
+        white: "#AAAAAA"
+        whiteB: "#FFFFFF"
+        yellow: "#AA5500"
+        yellowB: "#FFFF55"
+      - black: "black"
+        blackB: "black"
+        blue: "blue"
+        blueB: "blue"
+        cyan: "cyan"
+        cyanB: "cyan"
+        green: "green"
+        greenB: "green"
+        magenta: "magenta"
+        magentaB: "magenta"
+        name: "css"
+        red: "red"
+        redB: "red"
+        white: "white"
+        whiteB: "white"
+        yellow: "yellow"
+        yellowB: "yellow"
+      - black: "#2E3436"
+        blackB: "#2E3436"
+        blue: "#3465A4"
+        blueB: "#3465A4"
+        cyan: "#06989A"
+        cyanB: "#06989A"
+        defaultBackground: 0
+        defaultForeground: 7
+        green: "#4E9A06"
+        greenB: "#4E9A06"
+        magenta: "#75507B"
+        magentaB: "#75507B"
+        name: "gnome-terminal"
+        red: "#CC0000"
+        redB: "#CC0000"
+        white: "#D3D7CF"
+        whiteB: "#D3D7CF"
+        yellow: "#C4A000"
+        yellowB: "#C4A000"
+    globalColorMapName: "xterm"
+  buildDiscarders:
+    configuredBuildDiscarders:
+      - "jobBuildDiscarder"
+  buildStepOperation:
+    enabled: false
+#  datadogGlobalConfiguration:
+#    ciInstanceName: "jenkins"
+#    collectBuildLogs: false
+#    emitConfigChangeEvents: true
+#    emitSecurityEvents: true
+#    emitSystemEvents: true
+#    enableCiVisibility: false
+#    hostname: ${JENKINS_HOST}
+#    reportWith: "HTTP"
+#    targetApiKey: ${DATADOG_API_KEY}
+#    targetApiURL: "https://api.datadoghq.com/api/"
+#    targetHost: "localhost"
+#    targetLogCollectionPort: 8125
+#    targetLogIntakeURL: "https://http-intake.logs.datadoghq.com/v1/input/"
+#    targetPort: 8125
+#    targetTraceCollectionPort: 8126
+  defaultFolderConfiguration:
+    healthMetrics:
+      - worstChildHealthMetric:
+          recursive: true
+  email-ext:
+    adminRequiredForTemplateTesting: false
+    allowUnregisteredEnabled: false
+    charset: "UTF-8"
+    debugMode: true
+    defaultBody: |-
+      $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
+
+      Check console output at $BUILD_URL to view the results.
+    defaultContentType: "text/plain"
+    defaultSubject: "$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!"
+    defaultSuffix: "@company.com"
+    defaultTriggerIds:
+      - "hudson.plugins.emailext.plugins.trigger.FailureTrigger"
+    mailAccount:
+      smtpHost: "email-smtp.region.amazonaws.com"
+      smtpPassword: ""
+      smtpPort: "465"
+      smtpUsername: "noreply@company.com"
+    maxAttachmentSize: -1
+    maxAttachmentSizeMb: -1
+    precedenceBulk: false
+    watchingEnabled: false
+  fingerprints:
+    fingerprintCleanupDisabled: false
+    storage: "file"
+  gitHubConfiguration:
+    apiRateLimitChecker: ThrottleForNormalize
+  gitHubPluginConfig:
+    configs:
+      - credentialsId: "github-app"
+        name: "GitHubOrgName"
+    hookUrl: "https://${JENKINS_HOST}/github-webhook/"
+  gitSCM:
+    addGitTagAction: false
+    allowSecondFetch: false
+    createAccountBasedOnEmail: false
+    disableGitToolChooser: false
+    globalConfigEmail: "devops@company.com"
+    globalConfigName: "devopsCompanyName"
+    hideCredentials: true
+    showEntireCommitSummaryInChanges: false
+    useExistingAccountWithSameEmail: false
+  globalDefaultFlowDurabilityLevel:
+    durabilityHint: PERFORMANCE_OPTIMIZED
+  jiraCloudPluginConfig:
+    sites:
+      - clientId: ${JIRA_OAUTH2_CLIENT_ID}
+        credentialsId: "jenkins-jira-cloud-oauth2-secret"
+        site: "company.atlassian.net"
+  jiraGlobalConfiguration:
+    sites:
+      - appendChangeTimestamp: true
+        credentialsId: "jira-devops-readwrite-user"
+        recordScmChanges: true
+        supportsWikiStyleComment: true
+        updateJiraIssueForAllStatus: true
+        url: "https://company.atlassian.net/"
+  junitTestResultStorage:
+    storage: "file"
+  location:
+    adminAddress: "admin@company.com"
+    url: "https://${JENKINS_HOST}"
+  mailer:
+    authentication:
+      password: "${Enter ENV_VAR of secret}"
+      username: "${Enter ENV_VAR of secret}"
+    charset: "UTF-8"
+    defaultSuffix: "@company.com"
+    smtpHost: "email-smtp.<region>.amazonaws.com"
+    smtpPort: "465"
+    useSsl: true
+    useTls: false
+  mavenModuleSet:
+    localRepository: "default"
+  pluginImpl:
+    enableCredentialsFromNode: false
+  pollSCM:
+    pollingThreadCount: 10
+  slackNotifier:
+    baseUrl: "https://company.slack.com/services/hooks/jenkins-ci/"
+    botUser: false
+    sendAsText: false
+    tokenCredentialId: "slack-build-status-pw"
+
+tool:
+  git:
+    installations:
+      - home: "git"
+        name: "Default"
+  mavenGlobalConfig:
+    globalSettingsProvider: "standard"
+    settingsProvider: "standard"

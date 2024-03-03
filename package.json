@@ -1,0 +1,39 @@
+{
+  "name": "net-clemans-jenkins",
+  "version": "1.0.0",
+  "description": "A feature enriched Jenkins Configuration as Code (JCasC) AWS CDK stack project.",
+  "main": "bin/index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "synth": "./node_modules/.bin/cdk synth --json > ./cloudformation.json",
+    "lint": "./node_modules/.bin/eslint ./bin/index.js ./lib/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+git@github.com:clemans/net.clemans.Jenkins.git"
+  },
+  "keywords": [
+    "aws-cdk",
+    "nodejs"
+  ],
+  "author": "Brooks C. Clemans <brooks@clemans.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "git@github.com:clemans/net.clemans.Jenkins/issues"
+  },
+  "homepage": "git@github.com:clemans/net.clemans.Jenkins#readme",
+  "dependencies": {
+    "aws-cdk-lib": "^2.131.0",
+    "constructs": "^10.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "esbuild": "^0.20.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1"
+  }
+}

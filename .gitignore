@@ -1,0 +1,75 @@
+# Ignore files not in root directory
+!jest.config.js
+
+# Ignore coverage reports
+**/coverage/**
+
+# Ignore archive files
+*.archive
+
+# Ignore backup files
+*.bak*
+
+# Ignore TypeScript declaration files
+*.d.ts
+
+# Ignore environment files
+*.env
+!sample_.env
+
+# Ignore backup files with "old" in the name
+*.old
+
+# Ignore original files
+*.original
+
+# Ignore template files
+*.template
+
+# Ignore CDK staging directory
+.cdk.staging
+
+# Ignore IDE-specific configuration
+.idea
+
+# Ignore VSCode-specific configuration
+.vscode
+
+# Ignore CDK synth output directory
+cdk.out
+
+# Ignore CDK CloudFormation templates
+cdk.yaml
+
+# Ignore custom configuration files
+configs.ts
+
+# Ignore parameters configuration
+parameters.ts
+
+# Ignore tags configuration
+tags.ts
+
+# Ignore logs directory
+logs
+
+# Ignore Node.js modules
+node_modules
+
+# Ignore macOS DS_Store files
+.DS_Store
+
+# Ignore built artifacts
+/dist/
+
+# Ignore npm packages
+/node_modules/
+
+# Ignore CDK synth output
+/cdk.out/
+
+# Ignore any generated AWS CDK CloudFormation templates
+/cdk.yaml
+
+# Ignore logs
+/logs/

@@ -1,0 +1,6 @@
+_*
+.*
+*.ts
+cdk.out/*
+docs/*
+node_modules/*
